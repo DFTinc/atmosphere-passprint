@@ -53,7 +53,10 @@ var getTokenResponse = function (query) {
     try {
         // Request an access token
         responseContent = HTTP.post(
-            "http://dev.oauth2.passprint.me/api/v1/oauth2/access_token", {
+            "http://dev.oauth2.passprint.me/oauth2/access_token", {
+                headers: {
+                    'Content-type': 'application/x-www-form-urlencoded'
+                },
                 params: {
                     client_id: config.clientId,
                     redirect_uri: OAuth._redirectUri('passprint', config),
@@ -75,7 +78,7 @@ var getTokenResponse = function (query) {
     // time from the response
     var parsedResponse = querystring.parse(responseContent);
     var accessToken = parsedResponse.access_token;
-    var expires = parsedResponse.expires;
+    var expires = parsedResponse.expires_in;
 
     if (!accessToken) {
         throw new Error("Failed to complete OAuth handshake with PassPrint " +
@@ -89,7 +92,7 @@ var getTokenResponse = function (query) {
 
 var getIdentity = function (accessToken, fields) {
     try {
-        return HTTP.get("https//dev.oauth2.passprint.me/api/v1/getIdentity", {
+        return HTTP.get("http//dev.oauth2.passprint.me/api/v1/user/getIdentity", {
             params: {
                 access_token: accessToken,
                 fields: fields
