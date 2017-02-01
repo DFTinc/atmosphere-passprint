@@ -37,7 +37,7 @@ PassPrint.requestCredential = function (options, credentialRequestCompleteCallba
         '?client_id=' + config.clientId +
         '&redirect_uri=' + OAuth._redirectUri('passprint', config) +
         '&scope=' + scope +
-        '&state=' + OAuth._stateParam(loginStyle, credentialToken, options && options.redirectUrl)
+        '&state=' + OAuth._stateParam(loginStyle, credentialToken, options && options.redirectUrl) +
         '&response_type=code';
 
     // Handle authentication type (e.g. for force login you need authType: "reauthenticate")
