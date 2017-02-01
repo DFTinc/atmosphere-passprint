@@ -1,5 +1,7 @@
 PassPrint = {};
 
+const PASSPRINT_ACCOUNTS = "http://dev.accounts.passprint.me";
+
 // Request PassPrint credentials for the user
 //
 // @param options {optional}
@@ -31,7 +33,7 @@ PassPrint.requestCredential = function (options, credentialRequestCompleteCallba
     var loginStyle = OAuth._loginStyle('passprint', config, options);
 
     var loginUrl =
-        'http://dev.oauth2.passprint.me/oauth2/authorize' +
+        PASSPRINT_ACCOUNTS + '/oauth2/authorize' +
         '?client_id=' + config.clientId +
         '&redirect_uri=' + OAuth._redirectUri('passprint', config) +
         '&scope=' + scope +

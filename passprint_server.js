@@ -1,5 +1,7 @@
 PassPrint = {};
 
+const PASSPRINT_ACCOUNTS = "http://dev.accounts.passprint.me";
+
 var querystring = Npm.require('querystring');
 
 PassPrint.handleAuthFromAccessToken = function handleAuthFromAccessToken(accessToken, expiresAt) {
@@ -53,7 +55,7 @@ var getTokenResponse = function (query) {
     try {
         // Request an access token
         responseContent = HTTP.post(
-            "http://dev.oauth2.passprint.me/oauth2/access_token", {
+            PASSPRINT_ACCOUNTS + "/oauth2/access_token", {
                 headers: {
                     'Content-type': 'application/x-www-form-urlencoded'
                 },
@@ -92,7 +94,7 @@ var getTokenResponse = function (query) {
 
 var getIdentity = function (accessToken, fields) {
     try {
-        return HTTP.get("http//dev.oauth2.passprint.me/api/v1/user/getIdentity", {
+        return HTTP.get(PASSPRINT_ACCOUNTS + "/api/v1/user/getIdentity", {
             params: {
                 access_token: accessToken,
                 fields: fields
