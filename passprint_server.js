@@ -2,8 +2,6 @@ PassPrint = {};
 
 const PASSPRINT_ACCOUNTS = "http://dev.accounts.passprint.me:3330";
 
-var querystring = Npm.require('querystring');
-
 PassPrint.handleAuthFromAccessToken = function handleAuthFromAccessToken(accessToken, expiresAt) {
     // include all fields from passprint
     var whitelisted = ['id', 'email', 'name', 'profile_picture',
@@ -33,16 +31,6 @@ OAuth.registerService('passprint', 2, null, function(query) {
     return PassPrint.handleAuthFromAccessToken(accessToken, (+new Date) + (1000 * expiresIn));
 });
 
-// checks whether a string parses as JSON
-var isJSON = function (str) {
-    try {
-        JSON.parse(str);
-        return true;
-    } catch (e) {
-        return false;
-    }
-};
-
 // returns an object containing:
 // - accessToken
 // - expiresIn: lifetime of token in seconds
@@ -71,14 +59,9 @@ var getTokenResponse = function (query) {
             {response: err.response});
     }
 
-    // If 'responseContent' parses as JSON, it is an error.
-    if (isJSON(responseContent)) {
-        throw new Error("Failed to complete OAuth handshake with PassPrint. " + responseContent);
-    }
-
     // Success!  Extract the passprint access token and expiration
     // time from the response
-    var parsedResponse = querystring.parse(responseContent);
+    var parsedResponse = JSON.parse(responseContent);
     var accessToken = parsedResponse.access_token;
     var expires = parsedResponse.expires_in;
 
