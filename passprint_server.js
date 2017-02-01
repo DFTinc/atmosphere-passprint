@@ -1,6 +1,6 @@
 PassPrint = {};
 
-const PASSPRINT_ACCOUNTS = "http://dev.accounts.passprint.me";
+const PASSPRINT_ACCOUNTS = "http://dev.accounts.passprint.me:3330";
 
 var querystring = Npm.require('querystring');
 

@@ -1,6 +1,6 @@
 PassPrint = {};
 
-const PASSPRINT_ACCOUNTS = "http://dev.accounts.passprint.me";
+const PASSPRINT_ACCOUNTS = "http://dev.accounts.passprint.me:3330";
 
 // Request PassPrint credentials for the user
 //
@@ -33,11 +33,12 @@ PassPrint.requestCredential = function (options, credentialRequestCompleteCallba
     var loginStyle = OAuth._loginStyle('passprint', config, options);
 
     var loginUrl =
-        PASSPRINT_ACCOUNTS + '/oauth2/authorize' +
+        PASSPRINT_ACCOUNTS + '/auth/oauth2/authorize' +
         '?client_id=' + config.clientId +
         '&redirect_uri=' + OAuth._redirectUri('passprint', config) +
         '&scope=' + scope +
-        '&state=' + OAuth._stateParam(loginStyle, credentialToken, options && options.redirectUrl);
+        '&state=' + OAuth._stateParam(loginStyle, credentialToken, options && options.redirectUrl)
+        '&response_type=code';
 
     // Handle authentication type (e.g. for force login you need authType: "reauthenticate")
     if (options && options.auth_type) {
