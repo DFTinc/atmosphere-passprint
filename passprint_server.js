@@ -1,6 +1,6 @@
 PassPrint = {};
 
-const PASSPRINT_ACCOUNTS = "http://dev.accounts.passprint.me:3330";
+const PASSPRINT_ACCOUNTS = "https://accounts.passprint.me";
 
 PassPrint.handleAuthFromAccessToken = function handleAuthFromAccessToken(accessToken, expiresAt) {
     // include all fields from passprint
