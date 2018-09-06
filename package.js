@@ -1,6 +1,7 @@
 Package.describe({
     summary: "PassPrint OAuth2 flow",
-    version: "0.0.1"
+    version: "1.0.0",
+    git: "https://github.com/DFTinc/atmosphere-passprint.git"
 });
 
 Package.onUse(function(api) {
